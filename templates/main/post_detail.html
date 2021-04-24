@@ -1,0 +1,25 @@
+{% extends "main/index.html" %}
+{% block title %}
+{{ post.header }}
+{% endblock %}
+{% block style %}
+.text{
+font-size: 20px;
+}
+{% endblock %}
+{% block content %}
+    Автор поста - {{post.blog.author.username}}
+    <br>
+    Название блога - <b><a href="{% url 'main:blog' post.blog.id %}">{{ post.blog.name }}</a></b>
+    <br>
+    Дата публикации - {{post.date_posted}}
+    <br>
+    Тема публикации - {{post.header}}
+    <br>
+    <i>
+        <div class="text">{{post.text}}</div>
+    </i>
+    <a href="{% url 'main:post' post.id %}" class="text">Подробнее</a>
+    <hr>
+
+{% endblock %}

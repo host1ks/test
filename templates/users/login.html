@@ -1,0 +1,18 @@
+{% extends "main/index.html" %}
+{% block title %}
+Авторизация
+{% endblock %}
+{% block content %}
+{% if request.user.is_authenticated %}
+    <b>Вы уже авторизированы!</b>
+{% else %}
+    <form method="post">
+        {% csrf_token %}
+        <div tyle="width:300px;margin:0 auto">
+        <input type="text" name="username" placeholder="Введите имя" maxlength="100" required id="id_username"><br>
+        <input type="text" name="password" placeholder="Введите пароль" maxlength="100" required id="id_password"><br>
+        <button type="submit"> Подтвердить </button><br>
+        </div>
+    </form>
+{% endif %}
+{% endblock %}

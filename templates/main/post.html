@@ -1,0 +1,38 @@
+{% extends "main/index.html" %}
+{% block title %}
+Мой блог
+{% endblock %}
+{% block style %}
+.text{
+font-size: 20px;
+
+{% endblock %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    Тема публикации: <div>{{ form.header }}</div>
+    <br>
+    <br>
+    Текст: <div>{{ form.text }}</div>
+    <br>
+    <select name="blog" style="display: none" id="">
+        <option selected value="{{blog.id}}"></option>
+    </select>
+    <button type="submit"> Добавить пост</button>
+    <br>
+</form>
+    Название блога - <b>{{ blog.name }}</b>
+    <br>
+{% for post in posts %}
+    <br>
+    Дата публикации - {{post.date_posted}}
+    <br>
+    Тема публикации - {{post.header}}
+    <br>
+    <i>
+        <div class="text">{{post.text|truncatechars:10}}</div>
+    </i>
+    <a href="{% url 'main:post' post.id %}" class="text">Подробнее</a>
+    <hr>
+{% endfor %}
+{% endblock %}

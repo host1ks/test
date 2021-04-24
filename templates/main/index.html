@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <style type="text/css">
+        .button{
+            display: inline-block;
+            list-style: none;
+            margin-right:10px;
+        }
+        a{
+            text-decoration: none;
+        }
+        {% block style %}{% endblock %}
+    </style>
+        {% block head %}{% endblock %}
+</head>
+<body>
+    <ul>
+        {% if request.user.is_authenticated %}
+        Добро пожаловать, {{ user.username }}
+        <br>
+        <div class="button"><li><a href="{% url 'main:main' %}">Главная</a></li></div>
+        <div class="button"><li><a href="{% url 'main:posts' %}">Мой блог</a></li></div>
+        <div class="button"><li><a href="{% url 'main:news' %}">Новости</a></li></div>
+        <div class="button"><li><a href="{% url 'logout' %}">Выход</a></li></div>
+        {% else %}
+        <div class="button"><li><a href="{% url 'main:main' %}">Главная</a></li></div>
+        <div class="button"><li><a href="{% url 'login' %}">Мой блог</a></li></div>
+        <div class="button"><li><a href="{% url 'login' %}">Новости</a></li></div>
+        <div class="button"><li><a href="{% url 'login' %}">Войти</a></li></div>
+        {% endif %}
+    </ul>
+    <hr>
+{% block content %}{% endblock %}
+</body>
+</html>

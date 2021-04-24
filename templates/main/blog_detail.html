@@ -1,0 +1,31 @@
+{% extends "main/index.html" %}
+{% block title %}
+{{ post.blog.name }}
+{% endblock %}
+{% block content %}
+    Автор блога - {{blog.author}} <br>
+    Название блога - {{blog.name}}
+    <form method="post">
+    {% if blog.author != request.user %}
+        {% csrf_token %}
+        {% if sub == True %}
+            <input type="submit" value="Отписаться" name="{{ blog.id }}" />
+        {% else %}
+            <input type="submit" value="Подписаться" name="{{ blog.id }}" />
+        {% endif %}
+    {% endif %}
+
+    </form>
+{% for post in posts %}
+    <hr>
+    Дата публикации - {{post.date_posted}}
+    <br>
+    Тема публикации - {{post.header}}
+    <br>
+    <i>
+        <div class="text">{{post.text|truncatechars:10}}</div>
+    </i>
+    <a href="{% url 'main:post' post.id %}" class="text">Подробнее</a>
+    <hr>
+{% endfor %}
+{% endblock %}
